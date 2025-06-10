@@ -1,0 +1,22 @@
+<section class="testimonial-section-wrapper container">
+    <ngb-carousel *ngIf="chunkedTestimonials && chunkedTestimonials.length"
+        [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators"
+        [interval]="interval" [wrap]="wrap" [pauseOnHover]="pauseOnHover" [keyboard]="keyboard" [animation]="animation"
+        class="testimonials-carousel-container">
+        <ng-template ngbSlide *ngFor="let slideItems of chunkedTestimonials; let slideIndex = index"
+            [id]="'testimonial-slide-' + slideIndex">
+            <div class="testimonial-slide-content">
+                <!-- Container for multiple items within a single slide -->
+                <div class="slide-items-container">
+                    <div class="testimonial-item" *ngFor="let testimonial of slideItems">
+                        <img [src]="testimonial.imageUrl" [alt]="testimonial.name + ' profile picture'"
+                            class="profile-pic">
+                        <h3 class="name">{{ testimonial.name }}</h3>
+                        <p class="quote-text">{{ testimonial.quote }}</p>
+                        <div class="quotation-marks">”</div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-carousel>
+</section>

@@ -1,0 +1,43 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ], // Optional: Alias for app directory
+      "@services/*": [
+        "src/app/services/*"
+      ], // Tells TS that @services/ maps to src/app/services/
+      "@pipes/*": [
+        "src/app/pipes/*"
+      ], // Tells TS that @pipes/ maps to src/app/pipes/
+      "@components/*": [
+        "src/app/components/*"
+      ] // Optional: Alias for components
+      // Add more aliases if needed
+    },
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

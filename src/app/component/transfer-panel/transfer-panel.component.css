@@ -1,0 +1,655 @@
+/* src/app/component/transfer-panel/transfer-panel.component.css */
+:host {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    /* Adjust max-width */
+    color: var(--heading-color);
+    /* Default text color for light theme */
+}
+
+/* progress css start */
+.item-details {
+    flex-grow: 1;
+    overflow: hidden;
+    font-size: 0.85rem;
+    display: flex;
+    /* Allow vertical stacking of name, progress text, bar */
+    flex-direction: column;
+}
+
+/* Styles for progress text under item name */
+.item-progress-text {
+    font-size: 0.75rem;
+    color: #555;
+    /* Dark grey, similar to screenshot */
+    margin-top: 0px;
+    /* Adjusted from 3px, as .item-name has margin-bottom */
+    margin-bottom: 6px;
+    /* Space before the progress bar */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Wrapper for the linear progress bar within an item */
+.item-linear-progress-bar-wrapper {
+    width: 100%;
+    /* Takes full width of .item-details */
+}
+
+/* Styles for the custom linear progress bar */
+.progress-bar-custom {
+    width: 100%;
+    height: 6px;
+    /* Slim progress bar as per screenshot */
+    background-color: #e9ecef;
+    /* Light grey background */
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar-custom-fill {
+    height: 100%;
+    background-color: var(--button-color);
+    /* Green fill */
+    border-radius: 3px;
+    transition: width 0.2s ease-in-out;
+    width: 0%;
+}
+
+
+/* Ensure item-size (original size) is hidden during upload if progress text is shown */
+.file-list-item.is-uploading-item .item-size {
+    display: none;
+}
+
+/* Hide individual download/remove buttons for items during batch upload */
+.file-list-item.is-uploading-item .item-actions .btn-download-item,
+.file-list-item.is-uploading-item .item-actions .btn-remove-item {
+    display: none;
+}
+
+.file-summary .btn-cancel-upload {
+    color: var(--delete-color);
+    padding: 3px 5px;
+    background: none;
+    border: none;
+    /* cursor: pointer; */
+    font-size: 1rem;
+    /* Or 0.9rem to match other icons */
+}
+
+.file-summary .btn-cancel-upload:hover {
+    opacity: 0.7;
+}
+
+.file-list-item.is-completed-item .item-size,
+.file-list-item.is-completed-item .item-actions {
+    display: none;
+}
+
+.file-list-item.is-completed-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+}
+
+.file-list-item.is-completed-item .item-name {
+    margin-bottom: 0;
+}
+
+.completed-transfer-actions {
+    margin-top: 1rem;
+    /* padding-top: 1rem; */
+    /* border-top: 1px solid var(--border-color); */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.btn-new-transfer {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: var(--button-color);
+    /* Or a different color for "new action" */
+    border: 1px solid var(--button-color) !important;
+    color: var(--white-color);
+    border-radius: 5px;
+    /* cursor: pointer; */
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-new-transfer:hover {
+    background-color: var(--button-hover);
+    color: var(--button-color);
+}
+
+.btn-new-transfer i {
+    line-height: 1;
+}
+
+
+.upload-status-message-general {
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: 8px;
+    text-align: center;
+    width: 100%;
+}
+
+/* progress css end */
+
+
+/* Styles mimicking the light panel */
+.card-style {
+    background-color: var(--white-color);
+    color: var(--heading-color);
+    border-radius: 12px;
+    /* More rounded corners */
+    padding: 1rem 1.25rem;
+    /* Adjust padding */
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+    /* Softer shadow */
+    border: 1px solid #f0f0f0;
+    /* Very light border */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-more-actions {
+    display: grid;
+    /* Use grid for two equal columns */
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    /* No border needed below this */
+}
+
+.btn-add {
+    /* flex: 1; Removed flex */
+    padding: 12px 10px;
+    /* Adjust padding */
+    border: 1px dashed #d0d0d0;
+    /* Lighter dashed border */
+    background-color: #f8f9fd;
+    /* Very light background */
+    color: #555;
+    /* Darker grey text */
+    border-radius: 8px;
+    /* More rounded */
+    font-size: 0.8rem;
+    /* Slightly smaller text */
+    font-weight: 500;
+    /* cursor: pointer; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.3rem;
+    /* Smaller gap */
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-add i {
+    font-size: 1.1rem;
+    /* Smaller icon */
+    margin-bottom: 0.1rem;
+    color: var(--background);
+    /* Blue icon color */
+    background-color: #e7f1ff;
+    /* Light blue circle background */
+    padding: 6px;
+    border-radius: 50%;
+    width: 20px;
+    /* Fixed width/height for circle */
+    height: 20px;
+    line-height: 20px;
+    /* Center icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-add:hover {
+    background-color: #eef2f9;
+    border-color: #c0c2c5;
+    color: var(--heading-color);
+}
+
+.file-list-section {
+    padding-top: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* Allow this section to grow */
+    overflow: hidden;
+    /* Prevent content overflow */
+}
+
+.file-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    /* Slightly larger */
+    color: var(--heading-color);
+    /* Dark text */
+    margin-bottom: 0.5rem;
+    padding: 0 0.25rem;
+    /* Reduced padding */
+    flex-shrink: 0;
+    /* Prevent shrinking */
+}
+
+.file-summary .count {
+    font-weight: 600;
+    /* Bolder */
+}
+
+.file-summary .size {
+    font-size: 0.85rem;
+    color: #777;
+    /* Grey size */
+}
+
+.btn-clear-all {
+    /* Style the overall delete button */
+    color: #888;
+    padding: 3px 5px;
+    background: none;
+    border: none;
+    /* cursor: pointer; */
+    font-size: 1rem;
+    /* Make icon slightly larger */
+}
+
+.btn-clear-all:hover {
+    color: var(--delete-color);
+    /* Red hover */
+}
+
+
+.file-list-scroll {
+    flex-grow: 1;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    padding-right: 5px;
+    scrollbar-width: thin;
+    height: 100%;
+    scrollbar-color: #d0d0d0 #f8f9fa;
+}
+
+/* Keep the rest of the scrollbar styles */
+.file-list-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+
+.file-list-scroll::-webkit-scrollbar-track {
+    background: #f8f9fa;
+}
+
+.file-list-scroll::-webkit-scrollbar-thumb {
+    background-color: #d0d0d0;
+    border-radius: 3px;
+}
+
+.file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item-icon {
+    font-size: 1.2rem;
+    /* Adjusted icon size */
+    width: 25px;
+    text-align: center;
+    color: #888;
+    /* Default icon color */
+    flex-shrink: 0;
+}
+
+/* Add specific colors if needed */
+.item-icon.fa-folder {
+    color: #79aaff;
+}
+
+.item-icon.fa-file-pdf {
+    color: #e5598a;
+}
+
+.item-icon.fa-file-image {
+    color: #ff8787;
+}
+
+.item-name {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--heading-color);
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+/* Remove item size from details column */
+.item-details .item-size {
+    display: none;
+}
+
+/* Style for size on the right */
+.item-size {
+    font-size: 0.8rem;
+    color: #777;
+    flex-shrink: 0;
+    margin-left: auto;
+    /* Push to the right */
+    padding-left: 10px;
+    /* Space from name */
+}
+
+/* Hide individual remove button */
+.btn-remove {
+    display: none;
+}
+
+.empty-list {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+}
+
+
+/* --- Shareable Link Display --- */
+.share-link-display {
+    margin-top: 1rem;
+    /* padding-top: 1rem; */
+    /* border-top: 1px solid var(--border-color); */
+}
+
+.share-link-display label {
+    display: block;
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+.share-link-input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.share-link-input-group input {
+    flex-grow: 1;
+    margin-bottom: 0;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    background-color: #f8f9fa;
+    color: var(--heading-color);
+    height: 32.5px;
+    box-sizing: border-box;
+}
+
+.copy-button-wrapper {
+    position: relative;
+    display: flex;
+}
+
+.copy-button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    background-color: var(--white-color);
+    color: var(--button-color);
+    border: 1px solid var(--button-color);
+    white-space: nowrap;
+    height: 32.5px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.copy-button:hover {
+    background-color: var(--button-hover);
+    color: var(--button-color);
+}
+
+.copy-button i {
+    margin-right: 4px;
+}
+
+
+/* Actions Panel (If kept, usually removed when form panel exists) */
+.copy-success-tooltips-container {
+    position: absolute;
+    /* bottom: calc(100% + 6px); */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 5px;
+    z-index: 100;
+    width: max-content;
+    pointer-events: none;
+}
+
+.copy-success-tooltip {
+    background-color: #e3e7f9;
+    color: var(--button-color);
+    border: 1px solid var(--button-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    animation: fadeInHoldFadeOut 3s ease-in-out forwards;
+}
+
+@keyframes fadeInHoldFadeOut {
+    0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.9);
+    }
+
+    15% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    85% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.9);
+    }
+}
+
+.panel-actions {
+    display: none;
+    /* Hide this if submit is in form panel */
+}
+
+/* .panel-actions { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0e0e0; display: flex; gap: 1rem; justify-content: center; } */
+/* .btn-transfer { ... keep styles if used here ... } */
+
+.file-list-item {
+    display: flex;
+    align-items: center;
+    padding: 20px 6px;
+    border: 1px solid var(--border-color);
+    margin-top: 10px;
+    border-radius: 6px;
+}
+
+.item-icon {
+    font-size: 1.2rem;
+    width: 25px;
+    text-align: center;
+    color: #888;
+    flex-shrink: 0;
+}
+
+/* ... (keep icon color styles) ... */
+
+.item-name {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--heading-color);
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.item-size {
+    font-size: 0.8rem;
+    color: #777;
+    flex-shrink: 0;
+    /* margin-left: auto; --- REMOVED to allow buttons next to it --- */
+    white-space: nowrap;
+    /* Prevent size from wrapping */
+}
+
+/* --- NEW: Styles for individual action buttons --- */
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* Space between download/delete */
+    flex-shrink: 0;
+    /* Prevent shrinking */
+    margin-left: auto;
+    /* Push action buttons to the right */
+}
+
+.btn-remove-item,
+.btn-download-item {
+    background: none;
+    border: none;
+    padding: 3px 5px;
+    /* cursor: pointer; */
+    font-size: 0.9rem;
+    /* Adjust icon size */
+    color: #999;
+    /* Default subtle color */
+    line-height: 1;
+    /* Ensure consistent height */
+    transition: color 0.15s ease;
+}
+
+.btn-remove-item:hover {
+    color: var(--delete-color);
+    /* Red hover for delete */
+}
+
+.btn-download-item:hover {
+    color: var(--button-color);
+    /* Blue hover for download */
+}
+
+.btn-remove-item:disabled,
+.btn-download-item:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+/* --- End of new styles --- */
+
+/* Remove individual remove button (original commented out one, just in case) */
+.btn-remove {
+    display: none;
+}
+
+.empty-list {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+}
+
+.panel-actions-upload {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    /* Stack button and status */
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-upload-tg {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    /* Use your primary button colors */
+    background-color: var(--button-color);
+    border: 1px solid var(--button-color) !important;
+    color: var(--white-color);
+    border: none;
+    border-radius: 5px;
+    /* cursor: pointer; */
+    transition: background-color 0.2s ease;
+    display: flex;
+    /* Align icon and text */
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    /* Space between icon and text */
+}
+
+.btn-upload-tg:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.btn-upload-tg:not(:disabled):hover {
+    background-color: var(--button-hover);
+    color: var(--button-color);
+}
+
+.btn-upload-tg i {
+    line-height: 1;
+    /* Prevent icon causing extra height */
+}
+
+.upload-status-message {
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: 5px;
+}
+
+@media (max-width: 480px) {
+    .share-link-input-group {
+        flex-wrap: wrap;
+    }
+
+    .copy-button {
+        padding: 5px;
+        width: 100%;
+    }
+}

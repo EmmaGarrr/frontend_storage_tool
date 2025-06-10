@@ -1,0 +1,524 @@
+/* orbital-display.component.css */
+:host {
+    --light-green-border: #c8e6c9;
+    --darker-light-green-border: #b0d9b1;
+    --link-color: var(--primary-green);
+    --primary-green: #258c4e;
+    --border-radius-main: 30px;
+    --primary-green-darkened: #17a34a;
+
+    --glow-green-color: rgba(0, 147, 75, 0.2);
+    --glow-blue-color: rgba(0, 0, 128, 0.2);
+    /* Kept from original if used elsewhere */
+    --glow-offset: 4px;
+    --glow-blur: 18px;
+    --glow-spread: -2px;
+    --base-shadow-offset-y: 5px;
+    --base-shadow-blur: 22px;
+    --base-shadow-spread: 0px;
+    --base-shadow-color: rgba(0, 0, 0, 0.10);
+    --box-shadow-main:
+        calc(var(--glow-offset) * -1) calc(var(--glow-offset) * -1) var(--glow-blur) var(--glow-spread) var(--glow-blue-color),
+        var(--glow-offset) var(--glow-offset) var(--glow-blur) var(--glow-spread) var(--glow-green-color),
+        0px var(--base-shadow-offset-y) var(--base-shadow-blur) var(--base-shadow-spread) var(--base-shadow-color);
+    /* For checkmark */
+    --animated-border-thickness: 4px;
+    --animated-dash-length: 10px;
+    --animated-dash-gap: 10px;
+    --animated-cycle-length: calc(var(--animated-dash-length) + var(--animated-dash-gap));
+}
+
+
+/* ... (Keep your existing styles for .main-uplod-content, .upload-container, etc. up to .main-uplod-content>.area>.circles li:nth-child(10) ) ... */
+/* MODIFIED KEYFRAME ANIMATION FOR MARCHING ANTS (Clockwise and seamless) */
+@keyframes march {
+    to {
+        background-position:
+            calc(-1 * var(--animated-cycle-length)) 0,
+            var(--animated-cycle-length) 100%,
+            0 var(--animated-cycle-length),
+            100% calc(-1 * var(--animated-cycle-length));
+    }
+}
+
+.main-uplod-content {
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius-main);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.upload-container {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--box-shadow-main);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.upload-area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.img img {
+    height: 100%;
+    width: 300px;
+}
+
+.img {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -49px;
+    animation: cards_levitation__1wkej 1.2s ease-in-out infinite alternate;
+    position: relative;
+    z-index: 2;
+}
+
+
+@keyframes cards_levitation__1wkej {
+    0% {
+        transform: translate(0);
+    }
+
+    100% {
+        transform: translateY(.3em);
+    }
+}
+
+.dashed-circle-outer {
+    width: 100%;
+    border-radius: 5px;
+    padding: var(--animated-border-thickness);
+    box-sizing: border-box;
+    position: relative;
+}
+
+.dashed-circle-outer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    box-sizing: border-box;
+    background:
+        linear-gradient(90deg, var(--darker-light-green-border) 50%, transparent 50%) 0 0 / var(--animated-cycle-length) var(--animated-border-thickness) repeat-x,
+        linear-gradient(90deg, var(--darker-light-green-border) 50%, transparent 50%) 0 100% / var(--animated-cycle-length) var(--animated-border-thickness) repeat-x,
+        linear-gradient(0deg, var(--darker-light-green-border) 50%, transparent 50%) 0 0 / var(--animated-border-thickness) var(--animated-cycle-length) repeat-y,
+        linear-gradient(0deg, var(--darker-light-green-border) 50%, transparent 50%) 100% 0 / var(--animated-border-thickness) var(--animated-cycle-length) repeat-y;
+    animation: march 0.5s linear infinite;
+    z-index: 0;
+}
+
+.dashed-circle-inner {
+    width: 100%;
+    height: 100%;
+    background-color: var(--white-color);
+    border-radius: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+.dashed-circle-inner.drag-active-highlight {
+    background-color: var(--light-green-border);
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.plus-button {
+    background-color: var(--button-color);
+    /* This will be dark green if --button-color is your dark green */
+    color: var(--white-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 15PX;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    transition: background-color 0.2s ease-in-out;
+    animation-name: common_shakeElem__bJOpt;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: relative;
+    z-index: 1;
+    border: 2px solid var(--button-color);
+    rotate: 44deg;
+}
+
+@keyframes common_shakeElem__bJOpt {
+
+    18%,
+    2% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    16%,
+    4% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    10%,
+    14%,
+    6% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    12%,
+    8% {
+        transform: translate3d(4px, 0, 0);
+    }
+
+    18.1% {
+        transform: translate3d(-1px, 0, 0);
+    }
+}
+
+.plus-button:hover {
+    background-color: var(--button-hover);
+    /* This will be light green */
+    color: var(--button-color);
+    /* Icon becomes dark green. Change to var(--white-color) to keep icon white */
+}
+
+.plus-button i {
+    font-size: 24px;
+    rotate: 47deg;
+}
+
+.drag-drop-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--heading-color);
+    margin-bottom: 8px;
+}
+
+.limit-info {
+    font-size: 13px;
+    color: var(--text-color-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.limit-info .increase-limit-link {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.limit-info .increase-limit-link:hover {
+    text-decoration: underline;
+}
+
+.terms-text {
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+    line-height: 1.5;
+    max-width: 300px;
+    position: relative;
+    z-index: 1;
+}
+
+.terms-text a {
+    color: var(--link-color);
+    text-decoration: underline;
+}
+
+.terms-text a:hover {
+    text-decoration: none;
+}
+
+.main-uplod-content>.transfer-panel-container {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 480px) {
+    .upload-container {
+        height: auto;
+        padding: 20px;
+    }
+
+    .main-uplod-content {
+        padding: 10px;
+    }
+}
+
+.main-uplod-content>.area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.main-uplod-content>.area>.circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.main-uplod-content>.area>.circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate-circles 25s linear infinite;
+    bottom: -150px;
+}
+
+.main-uplod-content>.area>.circles li:nth-child(1) {
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+
+.main-uplod-content>.area>.circles li:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+
+.main-uplod-content>.area>.circles li:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.main-uplod-content>.area>.circles li:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.main-uplod-content>.area>.circles li:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.main-uplod-content>.area>.circles li:nth-child(6) {
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+}
+
+.main-uplod-content>.area>.circles li:nth-child(7) {
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+}
+
+.main-uplod-content>.area>.circles li:nth-child(8) {
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+}
+
+.main-uplod-content>.area>.circles li:nth-child(9) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+}
+
+.main-uplod-content>.area>.circles li:nth-child(10) {
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+}
+
+@keyframes animate-circles {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+/* END OF UNCHANGED STYLES */
+
+
+/* progres-bar css start */
+.circular-progress-wrapper-new {
+    width: 180px;
+    height: 180px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.circular-progress-svg-new {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    overflow: visible;
+}
+
+.circular-progress-background-new,
+.circular-progress-value-new {
+    fill: none;
+}
+
+.circular-progress-background-new {
+    stroke: #E6E8FA;
+    /* Light lavender/blue track */
+}
+
+.circular-progress-value-new {
+    stroke-linecap: round;
+}
+
+.circular-progress-value-new:not(.spinning-dot) {
+    transition: stroke-dashoffset 0.2s ease-out, stroke-dasharray 0.2s ease-out;
+}
+
+.progress-percentage-text-new {
+    position: absolute;
+    font-size: 36px;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* --- Initial State (0% and uploading) --- */
+.progress-initial-state .circular-progress-value-new {
+    stroke: var(--button-color);
+    /* Dark Green for spinner */
+}
+
+.progress-initial-state .circular-progress-value-new.spinning-dot {
+    animation: spin-dot 1.5s linear infinite;
+}
+
+.progress-initial-state .progress-percentage-text-new {
+    color: var(--button-color);
+    /* Dark Green text */
+}
+
+/* --- Active Progress State (1-99%) --- */
+.progress-active-state .circular-progress-value-new {
+    stroke: var(--button-color);
+    /* Dark Green for arc */
+}
+
+.progress-active-state .progress-percentage-text-new {
+    color: var(--button-color);
+    /* Dark Green text */
+}
+
+.progress-active-state .water-fill {
+    fill: var(--button-hover);
+    /* Light Green for water */
+}
+
+/* --- Complete State (100%) --- */
+.progress-complete-state .circular-progress-value-new {
+    stroke: var(--button-color);
+    /* Dark Green full arc at 100% */
+    stroke-dasharray: var(--component-circumference-val, 326.725) !important;
+    stroke-dashoffset: 0 !important;
+}
+
+.progress-complete-state .water-fill {
+    fill: var(--button-hover);
+    /* Light Green full water at 100% */
+}
+
+@keyframes spin-dot {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -326;
+    }
+}
+
+.water-fill {
+    /* The 'd' attribute changes, creating the fill effect. No CSS animation needed for shape. */
+}
+
+.dashed-circle-inner .content-wrapper p.clickable-text.select-folder-option {
+    cursor: pointer;
+    color: var(--button-color);
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.dashed-circle-inner .content-wrapper p.clickable-text.select-folder-option:hover {
+    text-decoration: underline;
+}
+
+/* progres-bar css end */

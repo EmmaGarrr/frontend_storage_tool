@@ -1,0 +1,154 @@
+<!-- src/app/component/home/home.component.html -->
+<div class="home-content">
+
+    <div class="bg-color">
+        <section class="section-1 hero-section container">
+            <div class="hero-content row">
+                <div class="col-12 txt-center" appScrollAnimation="slide-in-left" [animationThreshold]="0.01"
+                    animationDelay="0.1s">
+                    <h2 class="hero-title">Transfer and have your <span class="text-highlight-gradient">files travel for
+                            free</span></h2>
+                    <p class="hero-des">TransferNow is a simple and free way to securely share your files and folders.
+                    </p>
+                </div>
+                <div *ngIf="uploadError" class="upload-error-toast global-upload-error">
+                    {{ uploadError }}
+                </div>
+                <div *ngIf="uploadSuccessMessage" class="upload-success-toast global-upload-success">
+                    {{ uploadSuccessMessage }}
+                </div>
+                <div *ngIf="anonymousUploadLimitMessage" class="global-info-toast">
+                    {{ anonymousUploadLimitMessage }}
+                </div>
+                <div class="col-12 drop-item" appScrollAnimation="slide-in-right" [animationThreshold]="0.01"
+                    animationDelay="0.2s">
+
+                    <div class="upload-interaction-area">
+                        <div>
+                            <app-orbital-display (requestFileUpload)="triggerFileInput()"
+                                (requestFolderUpload)="triggerFolderInput()" [items]="selectedItems"
+                                [isUploading]="isUploading" [batchShareableLink]="shareableLinkForPanel"
+                                [uploadProgressPercentage]="uploadProgressDetails.percentage"
+                                [bytesSent]="uploadProgressDetails.bytesSent"
+                                [totalBytes]="uploadProgressDetails.totalBytes"
+                                [speedMBps]="uploadProgressDetails.speedMBps"
+                                [etaFormatted]="uploadProgressDetails.etaFormatted"
+                                [generalUploadStatusMessage]="uploadStatusMessage"
+                                (requestAddFilesFromPanel)="triggerFileInput()"
+                                (requestAddFolderFromPanel)="triggerFolderInput()"
+                                (itemRemovedFromPanel)="handleItemRemovedFromPanel($event)"
+                                (itemDownloadRequestedFromPanel)="handleDownloadRequest($event)"
+                                (transferInitiatedFromPanel)="initiateTransferFromPanel()"
+                                (cancelUploadFromPanel)="handleCancelUpload()"
+                                (newTransferFromPanel)="handleNewTransferRequest()"
+                                (dataTransferItemsDropped)="handleDataTransferItemsDropped($event)">
+                            </app-orbital-display>
+                        </div>
+                    </div>
+
+                    <input type="file" #fileInputForStart style="display: none;" (change)="onFileSelected($event)"
+                        multiple>
+                    <input type="file" #folderInputForStart style="display: none;" (change)="onFolderSelected($event)"
+                        webkitdirectory>
+
+                    <ng-container *ngIf="currentUser">
+                        <section class="section-my-files-link container">
+                            <div class="my-files-link-panel card-style">
+                                <p *ngIf="isLoadingUserFileCount">
+                                    <i class="fas fa-spinner fa-spin"></i> Checking your files...
+                                </p>
+                                <a routerLink="/my-files" class="btn btn-primary view-my-files-btn">
+                                    <i class="fas fa-folder-open"></i> View My Files
+                                </a>
+                            </div>
+                        </section>
+                    </ng-container>
+                </div>
+            </div>
+            <app-game-panel [isVisible]="isGamePanelVisible" (close)="closeGamePanel()">
+            </app-game-panel>
+        </section>
+    </div>
+    <!-- === END: File List Section === -->
+
+    <section class="section-3 integrate-transfer container">
+        <div class="row m-0 integration-content-wrapper" appScrollAnimation="fade-in" [animationThreshold]="0.1">
+            <div class="col-12 col-lg-12 p-0 itegration-content">
+                <div class="transfer-content">
+                    <h2 class="transfer-heading">Integrate TransferNow to your website for <span
+                            class="text-highlight-gradient">file reception</span></h2>
+                </div>
+                <p>Discover our tool for creating customized forms and then by adding a simple line of HTML code on your
+                    internet site you can directly receive files.</p>
+            </div>
+            <div class="col-12 col-lg-12 p-0">
+                <div class="contact-list">
+                    @for (item of transferList; track $index) {
+                    <ul appScrollAnimation="fade-in-up" [animationThreshold]="0.1"
+                        [animationDelay]="($index * 0.15) + 's'">
+                        <li>
+                            <span>
+                                <img [src]="item.img" alt="">
+                                <span class="">
+                                    <h2>{{item.title}}</h2>
+                                </span>
+                                <p>{{item.des}}</p>
+                            </span>
+                        </li>
+                    </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section-6" appScrollAnimation="fade-in" [animationThreshold]="0.1" animationDelay="0.3s">
+        <app-faq-accordion></app-faq-accordion>
+    </section>
+
+    <div class="millions-peopel-section section-8 container">
+        <div class="row g-5">
+            <div class="col-12 col-lg-6 col-md-6" appScrollAnimation="slide-in-left" [animationThreshold]="0.5">
+                <div class="millions-heading transfer-content">
+                    <h2 class="text-left"><span class="text-highlight-gradient">Millions</span> of people trust us</h2>
+                    <p>Join the millions of individuals and businesses who trust Transfer to store and protect their
+                        data in
+                        the cloud.</p>
+                    <a routerLink="/register">
+                        <button class="btn-signup">Sign up for free</button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 col-md-6 right-section" appScrollAnimation="slide-in-right"
+                [animationThreshold]="0.5" animationDelay="0.5s">
+                @for (item of redisterdUser; track $index) {
+                <div class="registerd-wrapper">
+                    <div class="img-box">
+                        <img [src]="item.icon" alt="">
+                    </div>
+                    <div class="registerd-user-heading">
+                        <h5>{{item.title}}</h5>
+                        <span>{{item.count}}</span>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Progress Overlay (remains unchanged) -->
+    <!-- <div class="upload-progress-overlay" *ngIf="isUploading && currentItemBeingUploaded">
+        <app-upload-progress-item [item]="currentItemBeingUploaded" [percentage]="uploadProgressDetails.percentage"
+            [bytesSent]="uploadProgressDetails.bytesSent" [totalBytes]="uploadProgressDetails.totalBytes"
+            [speedMBps]="uploadProgressDetails.speedMBps" [etaFormatted]="uploadProgressDetails.etaFormatted"
+            [itemsInTransfer]="selectedItems.length" (cancelUpload)="handleCancelUpload()">
+        </app-upload-progress-item>
+    </div> -->
+    <div *ngIf="showPlayGamesButton" class="play-games-notification-toast" (click)="toggleGamePanel()" role="button"
+        tabindex="0" (keydown.enter)="toggleGamePanel()" (keydown.space)="toggleGamePanel()"
+        title="Click to play games while you wait or after your transfer" appScrollAnimation="fade-in"
+        [animationThreshold]="0.001" animationDelay="0.3s">
+        <p>You've selected a large batch! How about some games while you wait or after?</p>
+    </div>
+</div>

@@ -1,0 +1,803 @@
+.app-header {
+    display: flex;
+    width: 100%;
+    height: 75px;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    position: relative;
+    background-color: var(--button-hover);
+    /* box-shadow: 0 2px 16px 0 #10182814; */
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+}
+
+.logo-link img {
+    height: 30px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: var(--white-color);
+    animation: slideDown 0.9s ease-out;
+    /* transition: transform .2s cubic-bezier(.79, 0, .178, 1); */
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.header-left {
+    display: flex;
+    gap: 40px;
+}
+
+.header-left h2 {
+    color: var(--button-color);
+    margin-bottom: 0;
+}
+
+.main-nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.main-nav a {
+    color: var(--text-color-secondary);
+    font-size: 15px;
+    font-weight: 600;
+
+    &:hover {
+        /* opacity: .75; */
+        color: var(--button-color);
+    }
+}
+
+.header-main {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.auth-nav {
+    gap: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-login {
+    font-size: 15px;
+    background-color: transparent;
+    padding: 6px 20px;
+    color: var(--text-color-secondary);
+    border: 2px solid var(--button-color);
+
+    &:hover {
+        color: var(--button-color);
+        background-color: var(--white-color);
+    }
+}
+
+.auth-nav .btn-register {
+    background-color: var(--button-color);
+    margin: 6px 0;
+    color: var(--white-color);
+    /* line-height: 31px; */
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 6px 24px;
+    border: 2px solid var(--button-color);
+
+    &:hover {
+        background-color: var(--white-color);
+        color: var(--button-color);
+        border: 2px solid var(--button-color);
+    }
+}
+
+/* login after css */
+.user-profile-area {
+    position: relative;
+    /* For dropdown positioning */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* Adjusted gap */
+}
+
+.logo-link h2.logo-text-typewriter {
+    color: var(--white-color);
+    margin-bottom: 0;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    letter-spacing: .17em;
+    vertical-align: middle;
+    width: 1ch;
+    position: relative;
+    padding-right: 0.5em;
+    animation: type-backspace-width 0.7s steps(7, end) forwards;
+}
+
+.logo-link h2.logo-text-typewriter::after {
+    content: '';
+    position: absolute;
+    width: 0.35em;
+    height: 0.35em;
+    background-color: red;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1ch;
+    opacity: 1;
+    animation: move-dot-backspace 0.7s steps(7, end) forwards;
+}
+
+.logo-link:hover h2.logo-text-typewriter {
+    animation: type-rest-of-word-width 0.7s steps(7, end) forwards 0.1s;
+}
+
+.logo-link:hover h2.logo-text-typewriter::after {
+    opacity: 1;
+    animation:
+        move-dot-typing 0.7s steps(7, end) forwards 0.1s,
+        blink-dot 0.60s steps(2, end) infinite 0.1s;
+}
+
+@keyframes type-rest-of-word-width {
+    from {
+        width: 1ch;
+    }
+
+    to {
+        width: 8ch;
+    }
+
+}
+
+@keyframes type-backspace-width {
+    from {
+        width: 8ch;
+    }
+
+    to {
+        width: 1ch;
+    }
+}
+
+@keyframes move-dot-typing {
+    from {
+        left: 1ch;
+    }
+
+    to {
+        left: 8ch;
+    }
+
+}
+
+@keyframes move-dot-backspace {
+    from {
+        left: 8ch;
+    }
+
+    to {
+        left: 1ch;
+    }
+}
+
+@keyframes blink-dot {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.user-profile-trigger {
+    /* cursor: pointer; */
+}
+
+.user-name-display {
+    color: var(--white-color);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-right: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+    /* Adjust as needed */
+}
+
+.user-initial-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Color from your second screenshot (dark magenta/purple) */
+    background-color: var(--button-color);
+    color: var(--white-color);
+    font-weight: 500;
+    /* Or bold if you prefer */
+    text-transform: uppercase;
+    /* Ensure initial is uppercase */
+}
+
+.user-initial-avatar span {
+    line-height: 1;
+    /* Better vertical alignment for single characters */
+}
+
+.user-avatar-sm.user-initial-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    /* Circular */
+    /* Remove image-specific styles if they were in .user-avatar-sm before */
+    object-fit: unset;
+    border: none;
+    /* Or '1px solid rgba(255, 255, 255, 0.2);' if you liked the subtle border */
+}
+
+.user-avatar-sm.user-initial-avatar span {
+    font-size: 0.9rem;
+    /* Adjust size of the initial character */
+}
+
+.user-avatar-lg.user-initial-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    /* Rounded square as in screenshot */
+    margin-right: 10px;
+    /* Remove image-specific styles if they were in .user-avatar-lg before */
+    object-fit: unset;
+}
+
+.user-avatar-lg.user-initial-avatar span {
+    font-size: 1.2rem;
+    /* Adjust size of the initial character */
+}
+
+/* .user-avatar-sm {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #67a56a;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+} */
+
+.user-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 20px);
+    right: 0;
+    background-color: var(--white-color);
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.05);
+    width: 290px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px);
+    transition: opacity 0.15s ease-out, visibility 0s 0.15s linear, transform 0.15s ease-out;
+    padding: 10px;
+    color: #3c4043;
+}
+
+.user-dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+}
+
+.dropdown-header-info {
+    display: flex;
+    align-items: center;
+    padding: 8px 6px;
+    /* cursor: default; */
+}
+
+/* .user-avatar-lg {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-right: 10px;
+    background-color: #67a56a;
+} */
+
+.dropdown-user-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.dropdown-user-details .username {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #202124;
+}
+
+.dropdown-user-details .email {
+    font-size: 0.8rem;
+    color: #5f6368;
+    margin-top: 2px;
+    line-height: 1.2;
+    word-break: break-all;
+}
+
+.dropdown-arrow {
+    color: #5f6368;
+    font-size: 0.8rem;
+    margin-left: auto;
+    /* Push arrow to the right */
+    transition: transform 0.2s ease;
+}
+
+.dropdown-arrow.fa-chevron-up {
+    transform: rotate(180deg);
+}
+
+.dropdown-divider {
+    border: none;
+    border-top: 1px solid #e8eaed;
+    /* Lighter divider */
+    margin: 8px -10px;
+    /* Extend to edges */
+}
+
+.btn-logout {
+    display: block;
+    width: 50%;
+    padding: 9px 10px;
+    background-color: transparent;
+    border: none;
+    color: var(--button-color);
+    text-align: left;
+    font-size: 0.85rem;
+    border-radius: 5px;
+    /* cursor: pointer; */
+    transition: background-color 0.15s ease;
+    box-sizing: border-box;
+    text-align: center;
+    border: 1px solid var(--button-color);
+}
+
+.text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-logout:hover {
+    background-color: #f1f3f4;
+}
+
+/* login after css end*/
+
+/* --- Hamburger Menu Button (Initially Hidden on Desktop) --- */
+.mobile-menu-toggle {
+    display: none;
+    background-color: transparent;
+    border: none;
+    color: var(--button-color);
+    font-size: 1.4rem;
+    /* cursor: pointer; */
+    padding: 5px;
+    margin-left: 10px;
+    line-height: 1;
+    /* z-index: 1051; */
+}
+
+.mobile-menu-toggle:hover {
+    opacity: 0.75;
+}
+
+/* toggle menu css start*/
+/* Add style for the logo image if using one */
+.logo-image {
+    height: 30px;
+    /* Adjust size as needed */
+    width: auto;
+    display: block;
+    /* Prevents extra space below */
+}
+
+/* --- Hamburger Menu Button (Initially Hidden on Desktop) --- */
+
+/* --- Mobile Menu Overlay --- */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s linear;
+    /* Delay visibility change */
+    z-index: 1000;
+    /* Below sidebar, above content */
+}
+
+.mobile-menu-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out;
+}
+
+
+/* --- Mobile Menu Sidebar --- */
+.mobile-menu-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    max-width: 85%;
+    height: 100vh;
+    background-color: var(--sidebar-bg, var(--white-color));
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    padding-top: 15px;
+    z-index: 1050;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-menu-sidebar.is-open {
+    transform: translateX(0);
+    /* Slide in */
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: flex-end;
+    /* Position close button to the right */
+    align-items: center;
+    margin-bottom: 20px;
+    min-height: 40px;
+    /* Ensure space for the button */
+}
+
+/* Optional: Sidebar Logo */
+/*
+  .sidebar-logo {
+      height: 25px;
+      width: auto;
+      margin-right: auto; /* Pushes close button to the right */
+/* }
+  */
+
+.sidebar-close-button {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    /* Adjust size */
+    color: var(--button-color);
+    /* Use variable or fallback */
+    /* cursor: pointer; */
+    padding: 5px;
+    line-height: 1;
+}
+
+.sidebar-close-button:hover {
+    opacity: 0.7;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* Take remaining space */
+}
+
+.sidebar-nav a {
+    color: var(--heading-color);
+    /* Dark text for light background */
+    padding: 12px 0;
+    /* Vertical padding */
+    text-decoration: none;
+    font-size: 1rem;
+    display: block;
+    /* Make the whole area clickable */
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a:focus {
+    /* background-color: var(--sidebar-hover-bg, #f0f0f0); */
+    opacity: 0.7;
+    /* Simple hover effect */
+}
+
+.sidebar-divider {
+    border: none;
+    border-top: 1px solid #eeeeee;
+    margin: 10px 0;
+}
+
+.mobile-btn {
+    border: 1px solid var(--background);
+    border-radius: 4px;
+    color: var(--background) !important;
+    text-align: center;
+    padding: 10px;
+}
+
+.sidebar-user-info-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px;
+    margin-bottom: 10px;
+    gap: 12px;
+}
+
+.sidebar-auth-buttons-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.sidebar-user-avatar.user-initial-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+}
+
+.sidebar-user-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.sidebar-username {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--heading-color, #202124);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-email {
+    font-size: 0.8rem;
+    color: var(--text-muted, #5f6368);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+}
+
+.sidebar-user-info-container .sidebar-divider {
+    border: none;
+    border-top: 1px solid var(--border-color, #e0e0e0);
+    margin: 15px -20px 10px -20px;
+}
+
+.sidebar-action-buttons {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.sidebar-btn-logout {
+    flex: 1;
+    background-color: var(--white-color);
+    border: 1px solid var(--button-color);
+    color: var(--button-color);
+}
+
+.sidebar-btn-logout:hover {
+    background-color: var(--button-hover-light, #f8f9fa);
+    opacity: 1;
+}
+
+.sidebar-btn {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
+    /* cursor: pointer; */
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    box-sizing: border-box;
+    line-height: 1.4;
+}
+
+.sidebar-btn:hover {
+    opacity: 0.85;
+    /* General hover effect, can be customized per button */
+}
+
+.sidebar-btn-login {
+    background-color: var(--white-color);
+    border: 1px solid var(--button-color);
+    color: var(--button-color);
+}
+
+.sidebar-btn-signup {
+    background-color: var(--button-color);
+    color: var(--white-color);
+}
+
+/* toggle menu css end */
+/* --- Media Query: Tablet/Smaller Desktops (e.g., below 992px) --- */
+@media (max-width: 992px) {
+
+    /* Hide the main navigation and auth links */
+    .main-nav,
+    .auth-nav {
+        display: none;
+    }
+
+    /* Show the hamburger button */
+    .mobile-menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 10px;
+    }
+
+    /* Adjust spacing */
+    .header-left {
+        /* Keep logo visible */
+        flex-grow: 1;
+        /* Allow logo to take space */
+    }
+
+    .header-main {
+        gap: 15px;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+    .user-profile-trigger {
+        padding: 5px;
+    }
+
+    .fixed-header {
+        animation: none;
+    }
+
+    .user-profile-area {
+        display: none !important;
+    }
+
+    .mobile-menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 10px;
+    }
+}
+
+/* --- Media Query: Mobile Phones (e.g., below 768px) --- */
+@media (max-width: 768px) {
+
+    /* Further reduce gap for auth buttons and hamburger */
+    .header-main {
+        gap: 15px;
+    }
+
+    /* Make auth buttons slightly smaller */
+    .auth-nav {
+        padding: 0 4px;
+        /* Adjust container padding */
+    }
+
+    .auth-nav .btn-login,
+    .auth-nav .btn-register {
+        font-size: 0.8rem;
+        padding: 0 10px;
+        line-height: 28px;
+        /* Adjust line-height */
+        margin: 4px 0;
+        /* Adjust vertical margin */
+    }
+
+    .mobile-menu-toggle {
+        font-size: 1.3rem;
+        margin-left: auto;
+        /* Adjust icon size */
+    }
+
+    .mobile-menu-sidebar {
+        width: 280px;
+        /* Slightly smaller sidebar */
+    }
+
+    .sidebar-nav a {
+        font-size: 0.95rem;
+        padding: 10px 0;
+    }
+
+    .user-name-display {
+        max-width: 70px;
+        /* Further reduce for smaller screens */
+    }
+
+    .auth-section {
+        gap: 5px;
+    }
+
+    .user-profile-area {
+        gap: 8px;
+    }
+
+    /* If auth section is visible, space out hamburger */
+    .header-left+.header-main>.auth-section+.mobile-menu-toggle {
+        margin-left: 10px;
+    }
+}
+
+/* Optional: Even smaller screens */
+@media (max-width: 480px) {
+    .header-left {
+        gap: 15px;
+    }
+
+    .header-main {
+        gap: 10px;
+    }
+
+    .auth-nav .btn-login,
+    .auth-nav .btn-register {
+        font-size: 0.75rem;
+        padding: 0 8px;
+        line-height: 26px;
+    }
+
+    .user-avatar-sm {
+        width: 26px;
+        height: 26px;
+    }
+
+    .user-dropdown-menu {
+        position: fixed;
+        width: 290px;
+        max-width: calc(100vw - 30px);
+        left: 50%;
+        right: auto;
+        top: 85px;
+        transform: translate(-50%, 5px);
+    }
+
+    .user-dropdown-menu.active {
+        transform: translate(-50%, 0);
+    }
+}

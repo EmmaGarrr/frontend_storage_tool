@@ -1,0 +1,225 @@
+/* testimonial-section.component.css */
+
+.testimonial-section-wrapper {
+    padding: 60px 0;
+    position: relative;
+}
+
+.testimonials-carousel-container {
+    max-width: 1200px;
+    /* Default for desktop (3 items) */
+    margin: 0 auto;
+}
+
+:host ::ng-deep .testimonials-carousel-container .carousel-inner {
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 30px;
+    background-color: #e8fedf;
+}
+
+.testimonial-slide-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Changed to flex-start for potentially varying heights */
+}
+
+.slide-items-container {
+    display: flex;
+    justify-content: center;
+    /* Center the item(s) in the container */
+    gap: 20px;
+    width: 100%;
+    align-items: stretch;
+    /* Make items in a row (if multiple) same height */
+    flex-wrap: wrap;
+    /* Allow wrapping if somehow items overflow (should not with TS logic) */
+}
+
+.testimonial-item {
+    background-color: var(--white-color);
+    /* Ensure --white-color is defined */
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #E4E6EC;
+    border-radius: 8px;
+
+    /* Default styling for 3 items per slide (desktop) */
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: calc((100% - 2 * 20px) / 3);
+    /* For 3 items with 2 gaps */
+    max-width: calc((100% - 2 * 20px) / 3);
+    min-width: 270px;
+    /* Minimum width for an item when multiple are shown */
+}
+
+.profile-pic {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 25px;
+    filter: grayscale(100%);
+}
+
+.name {
+    font-size: 1.8em;
+    color: var(--button-color);
+    /* Ensure --background is defined */
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.quote-text {
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    min-height: 100px;
+}
+
+.quotation-marks {
+    font-size: 3.5em;
+    color: var(--button-color);
+    /* Ensure --background is defined */
+    line-height: 0.5;
+}
+
+/* Arrow Positioning (Desktop - outside the main content flow) */
+:host ::ng-deep .testimonials-carousel-container .carousel-control-prev {
+    left: -60px;
+    width: 10%;
+}
+
+:host ::ng-deep .testimonials-carousel-container .carousel-control-next {
+    right: -60px;
+    width: 10%;
+}
+
+/* Arrow Icons */
+:host ::ng-deep .testimonials-carousel-container .carousel-control-prev-icon,
+:host ::ng-deep .testimonials-carousel-container .carousel-control-next-icon {
+    background-color: var(--button-color);
+    /* Ensure --button-color is defined */
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-size: 60% 60%;
+}
+
+/* Indicators */
+:host ::ng-deep .testimonials-carousel-container .carousel-indicators [data-bs-target] {
+    background-color: #ccc;
+}
+
+:host ::ng-deep .testimonials-carousel-container .carousel-indicators .active {
+    background-color: var(--button-color);
+}
+
+/* --- Responsive Adjustments --- */
+
+/* Tablet and Mobile (<= 992px) - Where itemsPerSlide in TS becomes 1 */
+@media (max-width: 992px) {
+    .testimonials-carousel-container {
+        max-width: 100%;
+        /* Carousel can span full width */
+        /* padding: 0 15px; /* Add side padding if you want space from screen edges */
+    }
+
+    .testimonial-item {
+        /* When itemsPerSlide is 1, this is the only item in slide-items-container */
+        flex-basis: 100%;
+        /* Allow it to take the full width of its parent (slide-items-container) */
+        max-width: 500px;
+        /* But cap its width for better readability on tablets */
+        min-width: unset;
+        /* Remove desktop min-width constraint */
+    }
+
+    /* Adjust arrow positioning to be inside or closer */
+    :host ::ng-deep .testimonials-carousel-container .carousel-control-prev {
+        left: 5px;
+        /* Or 0 if directly on edge */
+    }
+
+    :host ::ng-deep .testimonials-carousel-container .carousel-control-next {
+        right: 5px;
+        /* Or 0 if directly on edge */
+    }
+}
+
+/* Small Mobile Devices (<= 768px) - itemsPerSlide is still 1 */
+@media (max-width: 768px) {
+    .profile-pic {
+        width: 120px;
+        height: 120px;
+    }
+
+    .name {
+        font-size: 1.6em;
+    }
+
+    .testimonial-item {
+        padding: 15px;
+        max-width: 450px;
+        /* Adjust max width for smaller tablets/large phones */
+    }
+
+    :host ::ng-deep .testimonials-carousel-container .carousel-inner {
+        padding: 20px;
+        /* Adjust inner padding */
+    }
+}
+
+/* Extra Small Mobile Devices (<= 576px) - itemsPerSlide is still 1 */
+@media (max-width: 576px) {
+    .testimonial-item {
+        max-width: 100%;
+        /* Allow item to fill more of the screen */
+        /* The padding on .carousel-inner will provide spacing from screen edges */
+    }
+
+    .profile-pic {
+        width: 100px;
+        height: 100px;
+    }
+
+    .name {
+        font-size: 1.4em;
+    }
+
+    :host ::ng-deep .testimonials-carousel-container .carousel-control-prev-icon,
+    :host ::ng-deep .testimonials-carousel-container .carousel-control-next-icon {
+        width: 35px;
+        /* Slightly larger for easier touch on small screens */
+        height: 35px;
+    }
+
+    :host ::ng-deep .testimonials-carousel-container .carousel-inner {
+        padding: 15px;
+        /* Reduce padding for very small screens */
+    }
+
+    .slide-items-container {
+        gap: 10px;
+        /* Not really applicable with 1 item, but good for consistency */
+    }
+
+    /* Ensure arrows are visible and accessible */
+    :host ::ng-deep .testimonials-carousel-container .carousel-control-prev {
+        left: 0px;
+    }
+
+    :host ::ng-deep .testimonials-carousel-container .carousel-control-next {
+        right: 0px;
+    }
+    .testimonial-section-wrapper{
+        padding: 0px 0;
+    }
+}
